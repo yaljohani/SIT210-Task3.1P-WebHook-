@@ -1,0 +1,43 @@
+
+
+int led1 = A5; 
+
+int led2 = D7; 
+
+int photoresistor = A0;
+int analogvalue;
+
+
+
+void setup() {
+
+
+
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(photoresistor, INPUT);
+
+}
+
+
+void loop() {
+    
+    analogvalue = analogRead(photoresistor);
+    
+    if (analogvalue > 15) {
+        digitalWrite(led1, LOW);
+        digitalWrite(led2, LOW);
+        } else {
+            digitalWrite(led1, HIGH);
+            digitalWrite(led2, HIGH);
+            }
+            
+
+    Particle.publish("temp", String(analogvalue), PRIVATE);
+    delay(30000);
+
+
+  // And repeat!
+}
+
+
